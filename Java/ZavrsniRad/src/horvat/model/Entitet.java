@@ -1,7 +1,7 @@
-package edunova.model;
+package horvat.model;
 
-public class Entitet {
-
+public abstract class Entitet {
+	
 	private int sifra;
 
 	public int getSifra() {
@@ -20,6 +20,5 @@ public class Entitet {
 	public Entitet() {
 		super();
 	}
-	
 	
 }
