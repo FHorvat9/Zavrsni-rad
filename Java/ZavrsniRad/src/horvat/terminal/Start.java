@@ -22,7 +22,7 @@ public class Start {
 	}
 
 	public void glavniIzbornik() {
-		System.out.println("******Glavni izbornik******\n");
+		System.out.println("\n******Glavni izbornik******\n");
 		System.out.println("Dostupne opcije: ");
 		System.out.println("1. Blagajnici");
 		System.out.println("2. Proizvodi");
@@ -53,6 +53,11 @@ public class Start {
 	}
 
 	public static void main(String[] args) {
+		if(args.length==1) {
+			Pomocno.DEV=true;
+		}else {
+			Pomocno.DEV=false;
+		}
 		new Start();
 	}
 }
