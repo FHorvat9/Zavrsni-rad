@@ -2,7 +2,7 @@ package horvat.model;
 
 import java.math.BigDecimal;
 
-public class Proizvodi extends Entitet {
+public class Proizvod extends Entitet {
 
 	private String imeProizvoda;
 	private BigDecimal cijena;
@@ -23,11 +23,11 @@ public class Proizvodi extends Entitet {
 		this.cijena = cijena;
 	}
 
-	public Proizvodi() {
+	public Proizvod() {
 		super();
 	}
 
-	public Proizvodi(int sifra, String imeProizvoda, BigDecimal cijena) {
+	public Proizvod(int sifra, String imeProizvoda, BigDecimal cijena) {
 		super(sifra);
 		this.imeProizvoda = imeProizvoda;
 		this.cijena = cijena;

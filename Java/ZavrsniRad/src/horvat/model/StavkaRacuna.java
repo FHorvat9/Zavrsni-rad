@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 public class StavkaRacuna extends Entitet{
 	
 	private int brRacuna;
-	private Proizvodi proizvod;
+	private Proizvod proizvod;
 	private int kolicina;
 	private BigDecimal cijenaProizvoda;
 	private BigDecimal ukupnaCijenaProizvoda;
@@ -16,10 +16,10 @@ public class StavkaRacuna extends Entitet{
 	public void setBrRacuna(int brRacuna) {
 		this.brRacuna = brRacuna;
 	}
-	public Proizvodi getProizvod() {
+	public Proizvod getProizvod() {
 		return proizvod;
 	}
-	public void setProizvod(Proizvodi proizvod) {
+	public void setProizvod(Proizvod proizvod) {
 		this.proizvod = proizvod;
 	}
 	public int getKolicina() {
@@ -40,7 +40,7 @@ public class StavkaRacuna extends Entitet{
 	public void setUkupnaCijenaProizvoda(BigDecimal ukupnaCijenaProizvoda) {
 		this.ukupnaCijenaProizvoda = ukupnaCijenaProizvoda;
 	}
-	public StavkaRacuna(int sifra, int brRacuna, Proizvodi proizvod, int kolicina, BigDecimal cijenaProizvoda,
+	public StavkaRacuna(int sifra, int brRacuna, Proizvod proizvod, int kolicina, BigDecimal cijenaProizvoda,
 			BigDecimal ukupnaCijenaProizvoda) {
 		super(sifra);
 		this.brRacuna = brRacuna;

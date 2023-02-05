@@ -58,6 +58,7 @@ public class Blagajnici {
 			break;
 		case 5:
 			start.glavniIzbornik();
+			break;
 
 		}
 

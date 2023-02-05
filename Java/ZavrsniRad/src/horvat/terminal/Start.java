@@ -3,15 +3,18 @@ package horvat.terminal;
 import java.util.Scanner;
 
 import horvat.obrada.Blagajnici;
+import horvat.obrada.Proizvodi;
 
 
 public class Start {
 	
 	private Blagajnici blagajnici;
+	private Proizvodi proizvodi;
 	
 	public Start() {
 		Pomocno.ulaz = new Scanner(System.in);
 		blagajnici = new Blagajnici(this);
+		proizvodi = new Proizvodi(this);
 		pozdravi();
 		glavniIzbornik();
 	}
@@ -40,7 +43,7 @@ public class Start {
 			break;
 		case 2:
 			System.out.println("2");
-			glavniIzbornik();
+			proizvodi.izbornik();
 			break;
 		case 3:
 			System.out.println("3");
