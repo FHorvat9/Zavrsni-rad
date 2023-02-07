@@ -1,5 +1,6 @@
 package horvat.terminal;
 
+import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class Pomocno {
@@ -24,6 +25,7 @@ public class Pomocno {
 		}
 	}
 
+	
 	public static String unosTeksta(String poruka) {
 		String s;
 		while (true) {
@@ -54,5 +56,30 @@ public class Pomocno {
 
 		}
 	}
-
+	
+	public static BigDecimal unosPozBigDecimal(String Poruka){
+		
+		BigDecimal broj = BigDecimal.valueOf(unosPozitivniDouble(Poruka));
+		
+		
+		
+		return broj;
+	};
+	
+	public static double unosPozitivniDouble(String poruka) {
+		double i;
+		while (true) {
+			try {
+				System.out.print(poruka);
+				i = Double.parseDouble(ulaz.nextLine());
+				if (i < 0) {
+					System.out.println("Broj mora biti pozitivan");
+					continue;
+				}
+				return i;
+			} catch (Exception e) {
+				System.out.println("Niste unijeli broj");
+			}
+		}
+	}
 }
