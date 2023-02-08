@@ -1,5 +1,6 @@
 package horvat.obrada;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,37 +32,54 @@ public class Proizvodi {
 			unosProizvoda();
 			break;
 		case 2:
-			if (proizvodi.size() == 0) {
-				System.out.println("\n------------------------");
-				System.out.println("Nema upisanih proizvoda");
-				System.out.println("------------------------");
-				izbornik();
-			}
+			provjeraPrazno(proizvodi);
 			pregledProizvoda(true);
 			break;
 		case 3:
-			if (proizvodi.size() == 0) {
-				System.out.println("\n------------------------");
-				System.out.println("Nema upisanih proizvoda");
-				System.out.println("------------------------");
-				izbornik();
-			}
-//			izmjeniProizvod();
+			provjeraPrazno(proizvodi);
+			izmjeniProizvod();
 			break;
 		case 4:
-			if (proizvodi.size() == 0) {
-				System.out.println("\n------------------------");
-				System.out.println("Nema upisanih proizvoda");
-				System.out.println("------------------------");
-				izbornik();
-			}
-//			obrisiProizvod();
+			provjeraPrazno(proizvodi);
+			obrisiProizvod();
 			break;
 		case 5:
 			start.glavniIzbornik();
 			break;
 
 		}
+
+	}
+
+	private void provjeraPrazno(List<Proizvod> proizvodi) {
+		if (proizvodi.size() == 0) {
+			System.out.println("\n------------------------");
+			System.out.println("Nema upisanih proizvoda");
+			System.out.println("------------------------");
+			izbornik();
+		}
+
+	}
+
+	private void obrisiProizvod() {
+		pregledProizvoda(false);
+		while (true) {
+			proizvodi.remove(Pomocno.unosBrojRaspon("\nKoji proizvod zelite obrisati? ", 1, proizvodi.size()) - 1);
+			if (Pomocno.nastavankDaNe("Zelite li obrisati jos jedan proizvod? Y/N")) {
+				provjeraPrazno(proizvodi);
+				obrisiProizvod();
+			}
+			break;
+		}
+		izbornik();
+	}
+
+	private void izmjeniProizvod() {
+		pregledProizvoda(false);
+		int unos = (Pomocno.unosBrojRaspon("\nKoji proizvod zelite izmjeniti? ", 1, proizvodi.size()) - 1);
+		proizvodi.remove(unos);
+		proizvodi.add(unos, podatciProizvoda());
+		izbornik();
 
 	}
 
@@ -137,12 +155,22 @@ public class Proizvodi {
 		super();
 		this.start = start;
 		proizvodi = new ArrayList<>();
+		if (Pomocno.DEV) {
+			proizvodi.add(new Proizvod(1, "Jaja", BigDecimal.valueOf(12)));
+			proizvodi.add(new Proizvod(2, "Kruh", BigDecimal.valueOf(6.5)));
+			proizvodi.add(new Proizvod(3, "Mlijeko", BigDecimal.valueOf(9.5)));
+		}
 	}
 
 	public Proizvodi(ArrayList<Proizvod> proizvodi, Start start) {
 		super();
 		this.proizvodi = proizvodi;
 		this.start = start;
+		if (Pomocno.DEV) {
+			proizvodi.add(new Proizvod(1, "Jaja", BigDecimal.valueOf(12)));
+			proizvodi.add(new Proizvod(2, "Kruh", BigDecimal.valueOf(6.5)));
+			proizvodi.add(new Proizvod(3, "Mlijeko", BigDecimal.valueOf(9.5)));
+		}
 	}
 
 }

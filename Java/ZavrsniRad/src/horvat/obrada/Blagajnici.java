@@ -30,30 +30,15 @@ public class Blagajnici {
 			unosBlagajnika();
 			break;
 		case 2:
-			if (blagajnici.size() == 0) {
-				System.out.println("\n------------------------");
-				System.out.println("Nema upisanih blagajnika");
-				System.out.println("------------------------");
-				izbornik();
-			}
+			provjeraPrazno(blagajnici);
 			pregledBlagajnika(true);
 			break;
 		case 3:
-			if (blagajnici.size() == 0) {
-				System.out.println("\n------------------------");
-				System.out.println("Nema upisanih blagajnika");
-				System.out.println("------------------------");
-				izbornik();
-			}
+			provjeraPrazno(blagajnici);
 			izmjeniBlagajnika();
 			break;
 		case 4:
-			if (blagajnici.size() == 0) {
-				System.out.println("\n------------------------");
-				System.out.println("Nema upisanih blagajnika");
-				System.out.println("------------------------");
-				izbornik();
-			}
+			provjeraPrazno(blagajnici);
 			obrisiBlagajnika();
 			break;
 		case 5:
@@ -62,6 +47,16 @@ public class Blagajnici {
 
 		}
 
+	}
+
+	private void provjeraPrazno(List<Blagajnik> blagajnici) {
+		if (blagajnici.size() == 0) {
+			System.out.println("\n------------------------");
+			System.out.println("Nema upisanih blagajnika");
+			System.out.println("------------------------");
+			izbornik();
+		}
+		
 	}
 
 	private void izmjeniBlagajnika() {
@@ -75,16 +70,11 @@ public class Blagajnici {
 	}
 
 	private void obrisiBlagajnika() {
-		if (blagajnici.size() == 0) {
-			System.out.println("\n------------------------");
-			System.out.println("Nema upisanih blagajnika");
-			System.out.println("------------------------");
-			izbornik();
-		}
 		pregledBlagajnika(false);
 		while (true) {
 			blagajnici.remove(Pomocno.unosBrojRaspon("Kojeg blagajnika zelite obrisati? ", 1, blagajnici.size()) - 1);
 			if (Pomocno.nastavankDaNe("Zelite li obrisati jos jednog blagajnika Y/N")) {
+				provjeraPrazno(blagajnici);
 				obrisiBlagajnika();
 			} else {
 				break;
