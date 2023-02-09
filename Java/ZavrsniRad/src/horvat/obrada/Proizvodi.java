@@ -83,7 +83,7 @@ public class Proizvodi {
 
 	}
 
-	private void pregledProizvoda(boolean b) {
+	public void pregledProizvoda(boolean b) {
 		int n = 0;
 		for (Proizvod proizvod : proizvodi) {
 			System.out.println(++n + ". " + proizvod.toString());

@@ -24,6 +24,7 @@ public class Pomocno {
 			}
 		}
 	}
+	
 
 	
 	public static String unosTeksta(String poruka) {

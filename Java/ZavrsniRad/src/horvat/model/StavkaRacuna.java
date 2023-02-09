@@ -4,18 +4,13 @@ import java.math.BigDecimal;
 
 public class StavkaRacuna extends Entitet{
 	
-	private int brRacuna;
+	
 	private Proizvod proizvod;
 	private int kolicina;
 	private BigDecimal cijenaProizvoda;
 	private BigDecimal ukupnaCijenaProizvoda;
 	
-	public int getBrRacuna() {
-		return brRacuna;
-	}
-	public void setBrRacuna(int brRacuna) {
-		this.brRacuna = brRacuna;
-	}
+	
 	public Proizvod getProizvod() {
 		return proizvod;
 	}
@@ -40,10 +35,9 @@ public class StavkaRacuna extends Entitet{
 	public void setUkupnaCijenaProizvoda(BigDecimal ukupnaCijenaProizvoda) {
 		this.ukupnaCijenaProizvoda = ukupnaCijenaProizvoda;
 	}
-	public StavkaRacuna(int sifra, int brRacuna, Proizvod proizvod, int kolicina, BigDecimal cijenaProizvoda,
+	public StavkaRacuna(int sifra, Proizvod proizvod, int kolicina, BigDecimal cijenaProizvoda,
 			BigDecimal ukupnaCijenaProizvoda) {
 		super(sifra);
-		this.brRacuna = brRacuna;
 		this.proizvod = proizvod;
 		this.kolicina = kolicina;
 		this.cijenaProizvoda = cijenaProizvoda;
@@ -52,6 +46,14 @@ public class StavkaRacuna extends Entitet{
 	public StavkaRacuna() {
 		super();
 	}
+	@Override
+	public String toString() {
+		return proizvod+" "+kolicina+" "+ukupnaCijenaProizvoda+"kn ";
+	}
+	
+	
+	
+
 	
 	
 

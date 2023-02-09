@@ -2,19 +2,24 @@ package horvat.terminal;
 
 import java.util.Scanner;
 
+import horvat.model.StavkaRacuna;
 import horvat.obrada.Blagajnici;
 import horvat.obrada.Proizvodi;
+import horvat.obrada.Racuni;
 
 
 public class Start {
 	
 	private Blagajnici blagajnici;
 	private Proizvodi proizvodi;
+	private Racuni racuni;
+	private StavkaRacuna stavkaRacuna;
 	
 	public Start() {
 		Pomocno.ulaz = new Scanner(System.in);
 		blagajnici = new Blagajnici(this);
 		proizvodi = new Proizvodi(this);
+		racuni= new Racuni(this, blagajnici, proizvodi, stavkaRacuna);
 		pozdravi();
 		glavniIzbornik();
 	}
@@ -38,18 +43,19 @@ public class Start {
 	private void izborOpcija() {
 		switch (Pomocno.unosBrojRaspon("Unesite zeljenu opciju: ", 1, 4)) {
 		case 1:
-			System.out.println("1");
 			blagajnici.izbornik();
 			break;
 		case 2:
-			System.out.println("2");
 			proizvodi.izbornik();
 			break;
 		case 3:
-			System.out.println("3");
-			glavniIzbornik();
+			if(blagajnici.getBlagajnici().size()==0 || proizvodi.getProizvodi().size()==0) {
+				System.out.println("Nema unesenih proizvoda ili blagajnika!\nUnesite ih i pokusajte ponovo!");
+				glavniIzbornik();
+			}
+			racuni.izbornik();
 			break;
-		case 4:
+		case 4:		
 			System.out.println("Doviđenja!");
 			break;
 		}

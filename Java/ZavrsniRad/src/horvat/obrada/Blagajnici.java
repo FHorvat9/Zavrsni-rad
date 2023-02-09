@@ -11,6 +11,7 @@ public class Blagajnici {
 
 	private List<Blagajnik> blagajnici;
 	private Start start;
+	
 
 	public void izbornik() {
 		System.out.println("\n******Blagajnici izbornik******\n");
@@ -83,7 +84,7 @@ public class Blagajnici {
 		izbornik();
 	}
 
-	private void pregledBlagajnika(boolean a) {
+	public void pregledBlagajnika(boolean a) {
 		System.out.println("\n******Blagajnici******");
 		int broj = 0;
 		for (Blagajnik blagajnik : blagajnici) {
