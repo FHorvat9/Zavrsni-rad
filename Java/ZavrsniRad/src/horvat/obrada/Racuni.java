@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import java.util.GregorianCalendar;
-
 import java.util.List;
+
 
 import horvat.model.Racun;
 import horvat.model.StavkaRacuna;
@@ -39,13 +39,15 @@ public class Racuni {
 			break;
 		case 2:
 			provjeraPrazno(racuni);
-			pregledRacuna(true);
+			pregledRacuna(false);
 			break;
 		case 3:
-
+			provjeraPrazno(racuni);
+			izmjeniRacun();
 			break;
 		case 4:
-
+			provjeraPrazno(racuni);
+			obrisiRacun();
 			break;
 		case 5:
 			start.glavniIzbornik();
@@ -54,12 +56,39 @@ public class Racuni {
 		}
 	}
 
+	private void izmjeniRacun() {
+		pregledRacuna(true);
+		int unos = (Pomocno.unosBrojRaspon("\nKoji racun zelite izmjeniti? ", 1, racuni.size()) - 1);
+		racuni.remove(unos);
+		racuni.add(unos, podatciRacuna());
+		izbornik();
+
+	}
+
+	private void obrisiRacun() {
+		pregledRacuna(true);
+		while (true) {
+			racuni.remove(Pomocno.unosBrojRaspon("\nKoji racun zelite obrisati? ", 1, racuni.size()) - 1);
+			if (Pomocno.nastavankDaNe("Zelite li obrisati jos jedan racun? Y/N")) {
+				provjeraPrazno(racuni);
+				obrisiRacun();
+			}
+			break;
+		}
+		izbornik();
+
+	}
+
 	private void pregledRacuna(boolean b) {
 		for (Racun racun : racuni) {
 			System.out.println(racun.toString());
 		}
+		if(b) {
+			return;
+		}
 		if (!Pomocno.nastavankDaNe("Zelite li pogledati stavke od nekog racuna? Y/N")) {
-			izbornik();
+				izbornik();
+			
 		} else {
 			int unos = Pomocno.unosBrojRaspon("Koji racun zelite pogledati? ", 1, racuni.size()) - 1;
 			System.out.println(racuni.get(unos).toString());
@@ -123,23 +152,45 @@ public class Racuni {
 	private List<StavkaRacuna> noveStavke() {
 
 		List<StavkaRacuna> stavkeRacuna = new ArrayList<>();
-
+		List<Integer> sifre = new ArrayList<>();
+		
+		
 		while (true) {
 			StavkaRacuna stavka = new StavkaRacuna();
+			vanjska: while (true) {
+				int sifrastavke = Pomocno.unosBrojRaspon("Upisi sifru stavke ", 0, Integer.MAX_VALUE);
+				for (Integer integer : sifre) {
+					if (sifrastavke == integer) {
+						System.out.println("Postoji stavka s tom sifrom");
+						continue vanjska;
+					}
+				}
+				sifre.add(sifrastavke);
+				stavka.setSifra(sifrastavke);
+				for (Racun racun : racuni) {
+					for (StavkaRacuna sifra : racun.getStavkeRacuna()) {
+						if (stavka.getSifra() == sifra.getSifra()) {
+							System.out.println("Postoji stavka s tom sifrom");
+							continue vanjska;
+						}
+					}
+				}
+				break;
+			}
 
-			stavka.setSifra(Pomocno.unosBrojRaspon("Upisi sifru stavke ", 0, Integer.MAX_VALUE));
 			proizvodi.pregledProizvoda(false);
 			int unos = Pomocno.unosBrojRaspon("Koji proizvod ", 1, proizvodi.getProizvodi().size()) - 1;
 			stavka.setProizvod(proizvodi.getProizvodi().get(unos));
 			stavka.setCijenaProizvoda(proizvodi.getProizvodi().get(unos).getCijena());
-			int kolicina = Pomocno.unosBrojRaspon("Kolicina ", 0, 20);
-			stavka.setKolicina(kolicina);
-			stavka.setUkupnaCijenaProizvoda(stavka.getCijenaProizvoda().multiply(BigDecimal.valueOf(kolicina)));
+			stavka.setKolicina(Pomocno.unosBrojRaspon("Kolicina ", 0, 20));
+			stavka.setUkupnaCijenaProizvoda(stavka.getCijenaProizvoda().multiply(BigDecimal.valueOf(stavka.getKolicina())));
 			stavkeRacuna.add(stavka);
 
 			if (Pomocno.nastavankDaNe("Unesi jos stavki racuna? Y/N")) {
+				
 				continue;
 			} else {
+				sifre = new ArrayList<>();
 				return stavkeRacuna;
 			}
 		}

@@ -57,6 +57,7 @@ public class Start {
 			break;
 		case 4:		
 			System.out.println("Doviđenja!");
+			System.exit(0);
 			break;
 		}
 	}
