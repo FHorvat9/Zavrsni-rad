@@ -138,7 +138,7 @@ public class Racuni {
 		GregorianCalendar gc = (GregorianCalendar) Calendar.getInstance();
 		r.setDatum(gc.getTime());
 
-		r.setStavkeRacuna(noveStavke());
+		r.setStavkeRacuna(noveStavke(r.getBrojRacuna()));
 
 		BigDecimal zaPlatit = BigDecimal.valueOf(0);
 		for (StavkaRacuna stavka : r.getStavkeRacuna()) {
@@ -149,13 +149,15 @@ public class Racuni {
 		return r;
 	}
 
-	private List<StavkaRacuna> noveStavke() {
+	private List<StavkaRacuna> noveStavke(int brracuna) {
 
 		List<StavkaRacuna> stavkeRacuna = new ArrayList<>();
 		List<Integer> sifre = new ArrayList<>();
 		
 		
 		while (true) {
+			
+			
 			StavkaRacuna stavka = new StavkaRacuna();
 			vanjska: while (true) {
 				int sifrastavke = Pomocno.unosBrojRaspon("Upisi sifru stavke ", 0, Integer.MAX_VALUE);
@@ -184,6 +186,7 @@ public class Racuni {
 			stavka.setCijenaProizvoda(proizvodi.getProizvodi().get(unos).getCijena());
 			stavka.setKolicina(Pomocno.unosBrojRaspon("Kolicina ", 0, 20));
 			stavka.setUkupnaCijenaProizvoda(stavka.getCijenaProizvoda().multiply(BigDecimal.valueOf(stavka.getKolicina())));
+			stavka.setBrojRacuna(brracuna);
 			stavkeRacuna.add(stavka);
 
 			if (Pomocno.nastavankDaNe("Unesi jos stavki racuna? Y/N")) {
